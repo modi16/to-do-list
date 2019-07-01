@@ -1,0 +1,32 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+@import "~bootstrap/scss/bootstrap.scss";
+
+.body{
+    text-align: center;
+
+}
+.container{
+    background:  #f2eff2;
+    width: 50%;
+    height: 800px;
+}
+p{
+    color: #ceadcb;
+    font-size:65px;
+    font-weight:lighter;
+}
+
+.square{
+    width: 100%;
+    height: 35px;
+}
+
+ul{
+    list-style-type:none;
+}
+
+span{
+    float:right;
+    color: pink;
+}
