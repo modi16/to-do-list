@@ -4,9 +4,25 @@ export class List extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			list: ["Make the bed"],
-			value: ""
+			list: ["Make the bed"]
 		};
+
+		this.taskInput = React.createRef();
+		this.addTask = this.addTask.bind(this);
+	}
+
+	addTask(e) {
+		let elem = this.taskInput.value;
+		console.log(elem);
+		this.setState(prevState => {
+			return {
+				list: prevState.list.concat(elem)
+			};
+		});
+
+		e.preventDefault();
+
+		console.log(this.state.list);
 	}
 
 	render() {
@@ -17,7 +33,8 @@ export class List extends React.Component {
 					className="square"
 					type="text"
 					placeholder=" What needs to be done?"
-					//onChange={() => this.addTask()}
+					ref={this.taskInput}
+					onChange={this.addTask}
 				/>
 
 				<ul className="square">
