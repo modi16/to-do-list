@@ -7,7 +7,6 @@ export class List extends React.Component {
 			list: ["Make the bed"]
 		};
 
-		this.taskInput = React.createRef();
 		this.addTask = this.addTask.bind(this);
 	}
 
@@ -20,6 +19,8 @@ export class List extends React.Component {
 			};
 		});
 
+		//this.taskInput.value="";
+
 		e.preventDefault();
 
 		console.log(this.state.list);
@@ -27,15 +28,16 @@ export class List extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<input
-					id="task"
-					className="square"
-					type="text"
-					placeholder=" What needs to be done?"
-					ref={this.taskInput}
-					onChange={this.addTask}
-				/>
+			<div className="wrapper">
+				<form onSubmit={this.addTask}>
+					<input
+						id="task"
+						className="square"
+						type="text"
+						placeholder=" What needs to be done?"
+						ref={c => (this.taskInput = c)}
+					/>
+				</form>
 
 				<ul className="square">
 					{this.state.list.map(item => (
