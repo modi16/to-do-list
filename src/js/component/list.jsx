@@ -4,26 +4,36 @@ export class List extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			list: ["Make the bed"]
+			list: []
 		};
 
 		this.addTask = this.addTask.bind(this);
+		this.removeTask = this.removeTask.bind(this);
 	}
 
 	addTask(e) {
-		let elem = this.taskInput.value;
+		let cont = this.state.list.length;
+		let elem = {
+			key: cont,
+			task: this.taskInput.value
+		};
 		console.log(elem);
-		this.setState(prevState => {
-			return {
-				list: prevState.list.concat(elem)
-			};
+		this.setState({
+			list: this.state.list.concat(elem)
 		});
 
-		//this.taskInput.value="";
+		this.taskInput.value = "";
 
 		e.preventDefault();
 
 		console.log(this.state.list);
+	}
+
+	removeTask(key) {
+		console.log(key);
+		let fin = this.state.list.filter(item => item.key !== key);
+		console.log(fin);
+		this.setState({ list: fin });
 	}
 
 	render() {
@@ -39,11 +49,11 @@ export class List extends React.Component {
 					/>
 				</form>
 
-				<ul className="square">
+				<ul>
 					{this.state.list.map(item => (
-						<li key={item}>
-							{item}
-							<span>
+						<li className="square" key={item.key}>
+							{item.task}
+							<span onClick={this.removeTask}>
 								<i className="fas fa-times" />
 							</span>
 						</li>
