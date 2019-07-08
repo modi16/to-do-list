@@ -1,4 +1,6 @@
 import React from "react";
+import { Elements } from "./elements.jsx";
+import shortid from "shortid";
 
 export class List extends React.Component {
 	constructor() {
@@ -14,7 +16,7 @@ export class List extends React.Component {
 	addTask(e) {
 		let cont = this.state.list.length;
 		let elem = {
-			key: cont,
+			key: shortid.generate(),
 			task: this.taskInput.value
 		};
 		console.log(elem);
@@ -30,9 +32,7 @@ export class List extends React.Component {
 	}
 
 	removeTask(key) {
-		console.log(key);
 		let fin = this.state.list.filter(item => item.key !== key);
-		console.log(fin);
 		this.setState({ list: fin });
 	}
 
@@ -48,17 +48,7 @@ export class List extends React.Component {
 						ref={c => (this.taskInput = c)}
 					/>
 				</form>
-
-				<ul>
-					{this.state.list.map(item => (
-						<li className="square" key={item.key}>
-							{item.task}
-							<span onClick={this.removeTask}>
-								<i className="fas fa-times" />
-							</span>
-						</li>
-					))}
-				</ul>
+				<Elements list={this.state.list} delete={this.removeTask} />
 			</div>
 		);
 	}
